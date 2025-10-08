@@ -1,0 +1,47 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: test-repo-cr-30-f
+  description: frontend component
+  annotations:
+    github.com/project-slug: ivedha-tech/test-repo-cr-30-f
+    github.com/repo-url: https://github.com/ivedha-tech/test-repo-cr-30-f
+    backstage.io/source-location: url:https://github.com/ivedha-tech/test-repo-cr-30-f
+    backstage.io/language: typescript
+    backstage.io/framework: react
+    google.com/cloudbuild-project-slug: prj-dev-platform-next
+    google.com/cloudbuild-location: us-central1
+    pulumi.com/project-slug: platformnex/testcrmappingqa/dev
+    pulumi.com/orga-slug: platformnex
+    # sonarqube.org/project-key: platformnex
+    artifact-registry/repository: projects/prj-dev-platform-next/locations/us-central1/repositories/platformnex
+    release-manager/repository-owner: group:default/guests
+    release-manager/repository: test-repo-cr-30-f
+    release-manager/branching-strategy: TBD
+    release-manager/auth-provider: github
+    jira/project-key: PEJ
+    repo-url: https://github.com/ivedha-tech/test-repo-cr-30-f
+    google.com/gcp-projectid: prj-dev-platform-next
+    google.com/cloudbuild-trigger-name: test-service-cr-30-f
+    # google.com/cloudbuild-project-slug: prj-dev-platform-next
+    # google.com/cloudbuild-location: us-central1
+    google.com/cloudrun-project-slug: prj-dev-platform-next
+    google.com/cloudrun-location: us-central1
+    google.com/cloudrun-service-name: test-service-cr-30-f
+    backstage.io/source-vcs: Github
+    # github.com/project-slug: ivedha-tech/platformnex-backend
+    # github.com/repo-url: https://github.com/ivedha-tech/test-repo-cr-30-f
+
+
+    
+spec:
+  type: service
+  lifecycle: development
+  owner: group:default/guests
+  system: Regression-test
+  steps:
+    - id: example-step
+      name: Example Step
+      action: debug:log
+      input:
+        message: "This is a placeholder step. Replace with your actual steps."

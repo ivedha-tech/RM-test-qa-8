@@ -1,0 +1,98 @@
+steps:
+  # Build the Docker image
+  - name: "gcr.io/cloud-builders/docker"
+    id: Build
+    entrypoint: "bash"
+    args:
+      - "-c"
+      - |
+        echo "Starting build process..."
+
+        echo test-v-dev-development
+
+        # Verify the binary is present
+        if [ ! -f "nex" ]; then
+          echo "Error: 'nex' binary not found!"
+          exit 1
+        fi
+
+        # Make the binary executable
+        chmod +x nex
+        echo "'nex' binary is now executable."
+
+        # Execute the build command
+        ./nex app --build test-v-dev-development
+
+        # Check the build status
+        if [ $? -ne 0 ]; then
+          echo "Build failed. Exiting..."
+          exit 1
+        fi
+
+        echo "Build completed successfully."
+
+  - name: "gcr.io/cloud-builders/docker/djdhhsd"
+    id: Push
+    entrypoint: "bash"
+    args:
+      - "-c"
+      - |
+        echo "Starting build process..."
+
+        # Verify the binary is present
+        if [ ! -f "nex" ]; then
+          echo "Error: 'nex' binary not found!"
+          exit 1
+        fi
+
+        # Make the binary executable
+        chmod +x nex
+        echo "'nex' binary is now executable."
+
+        # Execute the build command
+        ./nex app --push test-v-dev-development
+
+        # Check the build status
+        if [ $? -ne 0 ]; then
+          echo "Build failed. Exiting..."
+          exit 1
+        fi
+
+        echo "Build completed successfully."
+  - name: "gcr.io/cloud-builders/docker"
+    id: Deploy
+    entrypoint: "bash"
+    args:
+      - "-c"
+      - |
+        echo "Starting build process..."
+
+        # Verify the binary is present
+        if [ ! -f "nex" ]; then
+          echo "Error: 'nex' binary not found!"
+          exit 1
+        fi
+
+        # Make the binary executable
+        chmod +x nex
+        echo "'nex' binary is now executable."
+
+        # Execute the build command
+        ./nex app --deploy test-v-dev-development \
+        --project test \
+
+        # Check the build status
+        if [ $? -ne 0 ]; then
+          echo "Build failed. Exiting..."
+          exit 1
+        fi
+
+        echo "Build completed successfully."
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+
+substitutions:
+  _REGION: 'us-central1'
+  _SERVICE_NAME: 'test-v-dev-development'
+  _PULUMI_PROJECT: 'test'
