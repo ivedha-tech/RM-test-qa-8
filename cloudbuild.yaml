@@ -8,7 +8,7 @@ steps:
       - |
         echo "Starting build process..."
 
-        echo test-v-dev-development
+        echo test-qa-8-staging
 
         # Verify the binary is present
         if [ ! -f "nex" ]; then
@@ -21,7 +21,7 @@ steps:
         echo "'nex' binary is now executable."
 
         # Execute the build command
-        ./nex app --build test-v-dev-development
+        ./nex app --build test-qa-8-staging
 
         # Check the build status
         if [ $? -ne 0 ]; then
@@ -31,7 +31,7 @@ steps:
 
         echo "Build completed successfully."
 
-  - name: "gcr.io/cloud-builders/docker/djdhhsd"
+  - name: "gcr.io/cloud-builders/docker"
     id: Push
     entrypoint: "bash"
     args:
@@ -50,7 +50,7 @@ steps:
         echo "'nex' binary is now executable."
 
         # Execute the build command
-        ./nex app --push test-v-dev-development
+        ./nex app --push test-qa-8-staging
 
         # Check the build status
         if [ $? -ne 0 ]; then
@@ -78,8 +78,8 @@ steps:
         echo "'nex' binary is now executable."
 
         # Execute the build command
-        ./nex app --deploy test-v-dev-development \
-        --project test \
+        ./nex app --deploy test-qa-8-staging \
+        --project platformnex-regression \
 
         # Check the build status
         if [ $? -ne 0 ]; then
@@ -94,5 +94,5 @@ options:
 
 substitutions:
   _REGION: 'us-central1'
-  _SERVICE_NAME: 'test-v-dev-development'
-  _PULUMI_PROJECT: 'test'
+  _SERVICE_NAME: 'test-qa-8-staging'
+  _PULUMI_PROJECT: 'platformnex-regression'
